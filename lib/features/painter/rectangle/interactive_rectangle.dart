@@ -17,13 +17,22 @@ class _InteractiveRectanglesState extends State<InteractiveRectangles> {
   late List<List<Color>> rectangleColors;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     rectangleColors = List.generate(widget.totalColumn, (index) =>
         List.generate(widget.totalRow, (j) => Colors.blue));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (rectangleColors.length != widget.totalColumn) {
+      rectangleColors = List.generate(widget.totalColumn, (index) =>
+          List.generate(widget.totalRow, (j) => Colors.blue));
+    }
     final width = MediaQuery.of(context).size.width * 0.7;
 
     // Size of each rectangle
-    var rectSize = width / rectangleColors.length;
+    var rectSize = width / widget.totalColumn;
 
     return GestureDetector(
       onTapDown: (details) { // will update immediately after touch
@@ -32,8 +41,8 @@ class _InteractiveRectanglesState extends State<InteractiveRectangles> {
         final tapY = details.localPosition.dy;
 
         // Determine which rectangle was tapped
-        final int i = (tapX ~/ rectSize).clamp(0, 4);
-        final int j = (tapY ~/ rectSize).clamp(0, 4);
+        final int i = (tapX ~/ rectSize).clamp(0, widget.totalColumn);
+        final int j = (tapY ~/ (width / widget.totalRow)).clamp(0, widget.totalRow);
 
         // Change color of the tapped rectangle
         setState(() {
