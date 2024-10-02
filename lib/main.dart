@@ -33,7 +33,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var columns = 1, rows = 1;
+  var columns = 1, rows = 5;
 
   @override
   Widget build(BuildContext context) {

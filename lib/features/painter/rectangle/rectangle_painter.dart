@@ -49,10 +49,12 @@ class RectanglePainter extends CustomPainter {
       for (int j = 0; j < rows; j++) {
         double left = i * rectSize; // x coordinate
         double top = j * rectSize; // y coordinate
+        if (rows > 1) top = j * widthHeight;
+
         double right = left + (columns == 1 ? widthHeight : rectSize * 0.95); // width of the rectangle
         if (i == columns-1) right = left + rectSize; // override width of last column
 
-        double bottom = top + widthHeight; // height of the rectangle
+        double bottom = top + (widthHeight * 0.95); // height of the rectangle
         print('$i $j $left $top $right $bottom');
 
         // Set the color for the current rectangle
