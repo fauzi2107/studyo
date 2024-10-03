@@ -2,24 +2,24 @@ import '../../../ui_export.dart';
 import 'interactive_triangle_state.dart';
 import 'triangle_painter.dart';
 
-class InteractiveTriangleDownward extends StatefulWidget {
+class InteractiveTriangleUpward extends StatefulWidget {
 
   final Function(int) onChangeColumn;
 
-  const InteractiveTriangleDownward({super.key, required this.onChangeColumn});
+  const InteractiveTriangleUpward({super.key, required this.onChangeColumn});
 
   @override
-  _InteractiveTriangleDownwardState createState() =>
-      _InteractiveTriangleDownwardState();
+  _InteractiveTriangleUpwardState createState() =>
+      _InteractiveTriangleUpwardState();
 }
 
-class _InteractiveTriangleDownwardState extends InteractiveTriangleState<InteractiveTriangleDownward> {
+class _InteractiveTriangleUpwardState extends InteractiveTriangleState<InteractiveTriangleUpward> {
   // Start and end points for the line
-  Offset startPoint = const Offset(0, 25);
+  Offset startPoint = const Offset(0, 0);
 
   @override
   Widget build(BuildContext context) {
-    endPoint ??= Offset(width, triangleSize);
+    endPoint ??= Offset(width, 0);
     trianglePosition ??= endPoint;
 
     return GestureDetector(
@@ -34,7 +34,7 @@ class _InteractiveTriangleDownwardState extends InteractiveTriangleState<Interac
       child: CustomPaint(
         size: Size(width, triangleSize),
         painter: TrianglePainter(
-          angle: pi / 2, // point triangle to downward
+          angle: -pi / 2, // point triangle to downward
           triangleSize: triangleSize,
           trianglePosition: trianglePosition!,
         ),

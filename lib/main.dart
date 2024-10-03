@@ -1,5 +1,6 @@
 import 'package:studyo/features/painter/rectangle/interactive_rectangle.dart';
 import 'package:studyo/features/painter/triangle/interactive_triangle_leftward.dart';
+import 'package:studyo/features/painter/triangle/interactive_triangle_upward.dart';
 
 import 'features/painter/triangle/interactive_triangle_downward.dart';
 import 'features/painter/triangle/interactive_triangle_rightward.dart';
@@ -75,6 +76,14 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ],
+            ),
+            InteractiveTriangleUpward(
+              onChangeColumn: (totalColumn) {
+                if (columns == totalColumn) return;
+                setState(() {
+                  columns = totalColumn;
+                });
+              },
             )
           ],
         ),
