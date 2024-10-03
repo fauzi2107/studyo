@@ -31,7 +31,6 @@ class LineWithMovableTrianglePainter extends CustomPainter {
     const double triangleSize = 25.0;
 
     // Calculate the angle of the line (direction)
-    // double angle = atan2(end.dy - start.dy, end.dx - start.dx);
     double angle = pi / 2;
 
     // Define the points of the triangle (arrowhead)

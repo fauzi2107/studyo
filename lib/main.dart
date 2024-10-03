@@ -3,6 +3,7 @@ import 'package:studyo/features/painter/line_triangle/line_triangle.dart';
 import 'package:studyo/features/painter/rectangle/interactive_rectangle.dart';
 
 import 'features/painter/line_triangle/interactive_triangle.dart';
+import 'features/painter/line_triangle/vertical_line.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,9 +51,15 @@ class _HomePageState extends State<HomePage> {
                 });
               },
             ),
-            InteractiveRectangles(
-              totalColumn: columns,
-              totalRow: rows,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InteractiveVerticalLineWithTriangle(),
+                InteractiveRectangles(
+                  totalColumn: columns,
+                  totalRow: rows,
+                ),
+              ],
             )
           ],
         ),

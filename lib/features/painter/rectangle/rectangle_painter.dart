@@ -1,33 +1,5 @@
 import 'package:flutter/material.dart';
 
-class BaseRectanglePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Define a paint object to style the rectangles
-    final paint = Paint()
-      ..color = Colors.blue
-      ..style = PaintingStyle.fill; // You can also use .stroke for outline
-
-    // Drawing multiple rectangles
-    for (int i = 0; i < 5; i++) {
-      for (int j = 0; j < 5; j++) {
-        double left = i * 50.0; // x coordinate
-        double top = j * 50.0; // y coordinate
-        double right = left + 40; // width of the rectangle
-        double bottom = top + 40; // height of the rectangle
-
-        // Draw rectangle at calculated position
-        canvas.drawRect(Rect.fromLTRB(left, top, right, bottom), paint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false; // No need to repaint for now
-  }
-}
-
 class RectanglePainter extends CustomPainter {
   final List<List<Color>> rectangleColors;
   final double rectSize;
