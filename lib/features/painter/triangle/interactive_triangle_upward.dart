@@ -5,8 +5,14 @@ import 'triangle_painter.dart';
 class InteractiveTriangleUpward extends StatefulWidget {
 
   final Function(int) onChangeColumn;
+  final Function(double) onMovePointer;
+  final double? position;
 
-  const InteractiveTriangleUpward({super.key, required this.onChangeColumn});
+  const InteractiveTriangleUpward({super.key,
+    required this.onChangeColumn,
+    required this.onMovePointer,
+    this.position
+  });
 
   @override
   _InteractiveTriangleUpwardState createState() =>
@@ -21,15 +27,17 @@ class _InteractiveTriangleUpwardState extends InteractiveTriangleState<Interacti
   Widget build(BuildContext context) {
     endPoint ??= Offset(width, 0);
     trianglePosition ??= endPoint;
+    if (widget.position != null) {
+      trianglePosition = Offset(widget.position!, 0);
+    }
 
     return GestureDetector(
       // Detect drag updates and move the triangle along the line
       onPanUpdate: (details) {
-        setState(() {
-          trianglePosition = onPositionUpdate(details, startPoint);
-          final totalColumn = (trianglePosition!.dx / width) * 10;
-          widget.onChangeColumn(customMapping(totalColumn.toInt()));
-        });
+        trianglePosition = onPositionUpdate(details, startPoint);
+        final totalColumn = (trianglePosition!.dx / width) * 10;
+        widget.onChangeColumn(customMapping(totalColumn.toInt()));
+        widget.onMovePointer(trianglePosition!.dx);
       },
       child: CustomPaint(
         size: Size(width, triangleSize),
