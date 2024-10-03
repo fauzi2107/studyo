@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:studyo/features/painter/line_triangle/triangle_downward_painter.dart';
+import 'package:studyo/features/painter/line_triangle/triangle_painter.dart';
 import 'package:studyo/features/painter/rectangle/interactive_rectangle.dart';
 
-import 'features/painter/line_triangle/interactive_triangle.dart';
-import 'features/painter/line_triangle/interactive_triangle_rightside.dart';
+import 'features/painter/line_triangle/interactive_triangle_downward.dart';
+import 'features/painter/line_triangle/interactive_triangle_rightward.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            InteractiveLineWithTriangle(
+            InteractiveTriangleDownward(
               onChangeColumn: (totalColumn) {
                 if (columns == totalColumn) return;
                 setState(() {
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InteractiveTriangleRightSide(
+                InteractiveTriangleRightward(
                   onChangeRow: (totalRow) {
                     if (rows == totalRow) return;
                     setState(() {
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   totalColumn: columns,
                   totalRow: rows,
                 ),
-                InteractiveTriangleRightSide(
+                InteractiveTriangleRightward(
                   onChangeRow: (totalRow) {
                     if (rows == totalRow) return;
                     setState(() {

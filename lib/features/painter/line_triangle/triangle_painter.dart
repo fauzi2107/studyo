@@ -1,21 +1,17 @@
-import 'dart:math';
+import '../../../ui_export.dart';
 
-import 'package:flutter/material.dart';
-
-class TriangleDownwardPainter extends CustomPainter {
+class TrianglePainter extends CustomPainter {
   final Offset trianglePosition;
-  final double triangleSize;
+  final double triangleSize, angle;
 
-  TriangleDownwardPainter({
+  TrianglePainter({
     required this.trianglePosition,
     required this.triangleSize,
+    required this.angle,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Calculate the angle of the line (direction)
-    double angle = pi / 2;
-
     // Define the points of the triangle (arrowhead)
     Offset point1 = Offset(
       trianglePosition.dx - triangleSize * cos(angle - pi / 6),
@@ -39,7 +35,6 @@ class TriangleDownwardPainter extends CustomPainter {
       ..color = Colors.blue
       ..style = PaintingStyle.fill;
 
-    // canvas.rotate(90);
     canvas.drawPath(path, trianglePaint);
   }
 
