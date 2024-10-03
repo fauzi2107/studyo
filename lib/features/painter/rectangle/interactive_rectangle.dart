@@ -16,6 +16,8 @@ class _InteractiveRectanglesState extends State<InteractiveRectangles> {
   // 2D List to store the color state of each rectangle
   late List<List<Color>> rectangleColors;
 
+  double get width => MediaQuery.of(context).size.width * 0.7;
+
   @override
   void initState() {
     rectangleColors = List.generate(widget.totalColumn, (index) =>
@@ -25,11 +27,11 @@ class _InteractiveRectanglesState extends State<InteractiveRectangles> {
 
   @override
   Widget build(BuildContext context) {
-    if (rectangleColors.length != widget.totalColumn) {
+    if (rectangleColors.length != widget.totalColumn
+        || rectangleColors.first.length != widget.totalRow) {
       rectangleColors = List.generate(widget.totalColumn, (index) =>
           List.generate(widget.totalRow, (j) => Colors.blue));
     }
-    final width = MediaQuery.of(context).size.width * 0.7;
 
     // Size of each rectangle
     var rectSize = width / widget.totalColumn;

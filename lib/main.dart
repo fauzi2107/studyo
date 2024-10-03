@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:studyo/features/painter/line_triangle/line_triangle.dart';
+import 'package:studyo/features/painter/line_triangle/triangle_downward_painter.dart';
 import 'package:studyo/features/painter/rectangle/interactive_rectangle.dart';
 
 import 'features/painter/line_triangle/interactive_triangle.dart';
-import 'features/painter/line_triangle/vertical_line.dart';
+import 'features/painter/line_triangle/interactive_triangle_rightside.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -54,10 +54,25 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InteractiveVerticalLineWithTriangle(),
+                InteractiveTriangleRightSide(
+                  onChangeRow: (totalRow) {
+                    if (rows == totalRow) return;
+                    setState(() {
+                      rows = totalRow;
+                    });
+                  },
+                ),
                 InteractiveRectangles(
                   totalColumn: columns,
                   totalRow: rows,
+                ),
+                InteractiveTriangleRightSide(
+                  onChangeRow: (totalRow) {
+                    if (rows == totalRow) return;
+                    setState(() {
+                      rows = totalRow;
+                    });
+                  },
                 ),
               ],
             )

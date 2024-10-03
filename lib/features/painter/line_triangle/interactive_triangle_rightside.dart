@@ -2,13 +2,20 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class InteractiveVerticalLineWithTriangle extends StatefulWidget {
+import 'triangle_rightside_painter.dart';
+
+class InteractiveTriangleRightSide extends StatefulWidget {
+
+  final Function(int) onChangeRow;
+
+  const InteractiveTriangleRightSide({super.key, required this.onChangeRow});
+
   @override
-  _InteractiveVerticalLineWithTriangleState createState() =>
-      _InteractiveVerticalLineWithTriangleState();
+  _InteractiveTriangleRightSideState createState() =>
+      _InteractiveTriangleRightSideState();
 }
 
-class _InteractiveVerticalLineWithTriangleState extends State<InteractiveVerticalLineWithTriangle> {
+class _InteractiveTriangleRightSideState extends State<InteractiveTriangleRightSide> {
   // Set the start and end points for a vertical line
   Offset startPoint = const Offset(25, 0);  // Top of the line
   Offset? endPoint;   // Bottom of the line
@@ -51,61 +58,26 @@ class _InteractiveVerticalLineWithTriangleState extends State<InteractiveVertica
 
         setState(() {
           trianglePosition = newTrianglePosition;
+          final totalRow = (trianglePosition!.dy / height) * 10;
+          print('$totalRow ${customMapping(totalRow.toInt())}');
+          widget.onChangeRow(customMapping(totalRow.toInt()));
         });
       },
       child: CustomPaint(
         size: Size(triangleSize, height),
-        painter: LineWithMovableTrianglePainter(
+        painter: TriangleRightSidePainter(
           triangleSize: triangleSize,
           trianglePosition: trianglePosition!,
         ),
       ),
     );
   }
-}
 
-class LineWithMovableTrianglePainter extends CustomPainter {
-  final Offset trianglePosition;
-  final double triangleSize;
+  int customMapping(int number) {
+    if (number >= 1 && number <= 10) {
+      return 11 - number;  // Reverse the range 1-10
+    }
 
-  LineWithMovableTrianglePainter({
-    required this.trianglePosition,
-    required this.triangleSize,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Angle zero to make triangle point to the right side
-    double angle = 0;
-
-    // Define the points of the triangle (arrowhead)
-    Offset point1 = Offset(
-      trianglePosition.dx - triangleSize * cos(angle - pi / 6),
-      trianglePosition.dy - triangleSize * sin(angle - pi / 6),
-    );
-
-    Offset point2 = Offset(
-      trianglePosition.dx - triangleSize * cos(angle + pi / 6),
-      trianglePosition.dy - triangleSize * sin(angle + pi / 6),
-    );
-
-    // Create a path for the triangle
-    Path path = Path()
-      ..moveTo(trianglePosition.dx, trianglePosition.dy) // Move to the tip (end of the line)
-      ..lineTo(point1.dx, point1.dy) // Line to first triangle point
-      ..lineTo(point2.dx, point2.dy) // Line to second triangle point
-      ..close(); // Close the triangle path
-
-    // Fill the triangle with color
-    final trianglePaint = Paint()
-      ..color = Colors.blue
-      ..style = PaintingStyle.fill;
-
-    canvas.drawPath(path, trianglePaint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true; // Repaint when the triangle position changes
+    return 10;
   }
 }

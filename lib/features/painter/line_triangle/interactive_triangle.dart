@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'line_triangle.dart';
+import 'triangle_downward_painter.dart';
 
 class InteractiveLineWithTriangle extends StatefulWidget {
 
@@ -17,8 +17,9 @@ class InteractiveLineWithTriangle extends StatefulWidget {
 
 class _InteractiveLineWithTriangleState extends State<InteractiveLineWithTriangle> {
   // Start and end points for the line
-  Offset startPoint = Offset(0, 150);
+  Offset startPoint = const Offset(0, 25);
   Offset? endPoint;
+  final triangleSize = 25.0;
 
   // Initial position of the triangle (starting at the end point)
   Offset? trianglePosition;
@@ -31,20 +32,9 @@ class _InteractiveLineWithTriangleState extends State<InteractiveLineWithTriangl
   double get width => MediaQuery.of(context).size.width * 0.7;
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setState(() {
-        endPoint = Offset(width, 150);
-        trianglePosition = Offset(width, 150);
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    endPoint ??= Offset(width, 150);
-    trianglePosition ??= Offset(width, 150);
+    endPoint ??= Offset(width, triangleSize);
+    trianglePosition ??= Offset(width, triangleSize);
 
     return GestureDetector(
       // Detect drag updates and move the triangle along the line
@@ -73,10 +63,9 @@ class _InteractiveLineWithTriangleState extends State<InteractiveLineWithTriangl
         });
       },
       child: CustomPaint(
-        size: Size(width, width * 0.6),
-        painter: LineWithMovableTrianglePainter(
-          startPoint: startPoint,
-          endPoint: endPoint!,
+        size: Size(width, triangleSize),
+        painter: TriangleDownwardPainter(
+          triangleSize: triangleSize,
           trianglePosition: trianglePosition!,
         ),
       ),

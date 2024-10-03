@@ -2,51 +2,34 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class LineWithMovableTrianglePainter extends CustomPainter {
-  final Offset startPoint;
-  final Offset endPoint;
+class TriangleDownwardPainter extends CustomPainter {
   final Offset trianglePosition;
+  final double triangleSize;
 
-  LineWithMovableTrianglePainter({
-    required this.startPoint,
-    required this.endPoint,
+  TriangleDownwardPainter({
     required this.trianglePosition,
+    required this.triangleSize,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 1.0
-      ..style = PaintingStyle.stroke;
-
-    // Draw the line
-    canvas.drawLine(startPoint, endPoint, paint);
-
-    // Draw the triangle (arrowhead) at the triangle position
-    drawTriangle(canvas, paint, trianglePosition, startPoint, endPoint);
-  }
-
-  void drawTriangle(Canvas canvas, Paint paint, Offset tip, Offset start, Offset end) {
-    const double triangleSize = 25.0;
-
     // Calculate the angle of the line (direction)
     double angle = pi / 2;
 
     // Define the points of the triangle (arrowhead)
     Offset point1 = Offset(
-      tip.dx - triangleSize * cos(angle - pi / 6),
-      tip.dy - triangleSize * sin(angle - pi / 6),
+      trianglePosition.dx - triangleSize * cos(angle - pi / 6),
+      trianglePosition.dy - triangleSize * sin(angle - pi / 6),
     );
 
     Offset point2 = Offset(
-      tip.dx - triangleSize * cos(angle + pi / 6),
-      tip.dy - triangleSize * sin(angle + pi / 6),
+      trianglePosition.dx - triangleSize * cos(angle + pi / 6),
+      trianglePosition.dy - triangleSize * sin(angle + pi / 6),
     );
 
     // Create a path for the triangle
     Path path = Path()
-      ..moveTo(tip.dx, tip.dy) // Move to the tip (end of the line)
+      ..moveTo(trianglePosition.dx, trianglePosition.dy) // Move to the tip (end of the line)
       ..lineTo(point1.dx, point1.dy) // Line to first triangle point
       ..lineTo(point2.dx, point2.dy) // Line to second triangle point
       ..close(); // Close the triangle path
