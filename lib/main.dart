@@ -36,7 +36,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var columns = 1, rows = 1;
-  double? horizontalPosition;
+  double? horizontalPosition, verticalPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +63,12 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InteractiveTriangleRightward(
+                  position: verticalPosition,
+                  onMovePointer: (dy) {
+                    setState(() {
+                      verticalPosition = dy;
+                    });
+                  },
                   onChangeRow: (totalRow) {
                     if (rows == totalRow) return;
                     setState(() {
@@ -75,6 +81,12 @@ class _HomePageState extends State<HomePage> {
                   totalRow: rows,
                 ),
                 InteractiveTriangleLeftward(
+                  position: verticalPosition,
+                  onMovePointer: (dy) {
+                    setState(() {
+                      verticalPosition = dy;
+                    });
+                  },
                   onChangeRow: (totalRow) {
                     if (rows == totalRow) return;
                     setState(() {
