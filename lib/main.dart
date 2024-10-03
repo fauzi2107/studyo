@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:studyo/features/painter/line_triangle/triangle_painter.dart';
 import 'package:studyo/features/painter/rectangle/interactive_rectangle.dart';
 
-import 'features/painter/line_triangle/interactive_triangle_downward.dart';
-import 'features/painter/line_triangle/interactive_triangle_rightward.dart';
+import 'features/painter/triangle/interactive_triangle_downward.dart';
+import 'features/painter/triangle/interactive_triangle_rightward.dart';
+import 'ui_export.dart';
 
 void main() {
   runApp(const MyApp());

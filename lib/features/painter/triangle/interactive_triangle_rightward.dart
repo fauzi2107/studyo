@@ -1,6 +1,5 @@
-import 'package:studyo/features/painter/line_triangle/interactive_triangle_state.dart';
-
 import '../../../ui_export.dart';
+import 'interactive_triangle_state.dart';
 import 'triangle_painter.dart';
 
 class InteractiveTriangleRightward extends StatefulWidget {
