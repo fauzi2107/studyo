@@ -2,16 +2,28 @@ import '../../../ui_export.dart';
 
 class TrianglePainter extends CustomPainter {
   final Offset trianglePosition;
+  final Offset? startPoint, endPoint;
   final double triangleSize, angle;
 
   TrianglePainter({
     required this.trianglePosition,
     required this.triangleSize,
     required this.angle,
+    this.startPoint,
+    this.endPoint
   });
 
   @override
   void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 4.0
+      ..style = PaintingStyle.stroke;
+
+    // Draw the vertical line
+    if (startPoint != null && endPoint != null)
+      canvas.drawLine(startPoint!, endPoint!, paint);
+
     // Define the points of the triangle (arrowhead)
     Offset point1 = Offset(
       trianglePosition.dx - triangleSize * cos(angle - pi / 6),

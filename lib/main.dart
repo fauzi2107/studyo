@@ -1,4 +1,5 @@
 import 'package:studyo/features/painter/rectangle/interactive_rectangle.dart';
+import 'package:studyo/features/painter/triangle/interactive_triangle_leftward.dart';
 
 import 'features/painter/triangle/interactive_triangle_downward.dart';
 import 'features/painter/triangle/interactive_triangle_rightward.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   totalColumn: columns,
                   totalRow: rows,
                 ),
-                InteractiveTriangleRightward(
+                InteractiveTriangleLeftward(
                   onChangeRow: (totalRow) {
                     if (rows == totalRow) return;
                     setState(() {
