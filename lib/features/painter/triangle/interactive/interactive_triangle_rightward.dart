@@ -1,8 +1,4 @@
-import 'package:studyo/features/painter/triangle/enum_triangle_direction.dart';
-
-import '../../../ui_export.dart';
-import 'interactive_triangle_state.dart';
-import 'triangle_painter.dart';
+import '../../../../ui_export.dart';
 
 class InteractiveTriangleRightward extends StatefulWidget {
 

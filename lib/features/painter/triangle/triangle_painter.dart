@@ -62,17 +62,36 @@ class TrianglePainter extends CustomPainter {
       text: span,
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
-    );
-    textPainter.layout();
-
-    // Calculate the center of the triangle to position the text
-    Offset textPosition = Offset(
-      trianglePosition.dx - textPainter.width / 2,
-      trianglePosition.dy - triangleSize / 2 - textPainter.height / 2,
-    );
+    )..layout();
 
     // Paint the text at the center of the triangle
-    textPainter.paint(canvas, textPosition);
+    textPainter.paint(canvas, textPosition(textPainter));
+  }
+
+  /// Calculate the center of the triangle to position the text
+  Offset textPosition(TextPainter textPainter) {
+    switch (direction) {
+      case TriangleDirection.upward:
+        return Offset(
+          trianglePosition.dx - textPainter.width / 2,
+          trianglePosition.dy + triangleSize / 2 - textPainter.height / 2,
+        );
+      case TriangleDirection.downward:
+        return Offset(
+          trianglePosition.dx - textPainter.width / 2,
+          trianglePosition.dy - triangleSize / 2 - textPainter.height / 2,
+        );
+      case TriangleDirection.leftward:
+        return Offset(
+          trianglePosition.dx + triangleSize / 2 - textPainter.width / 2,
+          trianglePosition.dy - textPainter.height / 2,
+        );
+      case TriangleDirection.rightward:
+        return Offset(
+          trianglePosition.dx - triangleSize / 2 - textPainter.width / 2,
+          trianglePosition.dy - textPainter.height / 2,
+        );
+    }
   }
 
   @override
