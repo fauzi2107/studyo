@@ -24,11 +24,13 @@ class _HomePageState extends HomeState<HomeScreen> {
               onMovePointer: onUpdateHorizontalPointer,
               onChangeColumn: onUpdateColumn,
               direction: TriangleDirection.downward,
+              columns: columns,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InteractiveTriangleRightward(
+                  rows: rows,
                   position: verticalPosition,
                   onMovePointer: onUpdateVerticalPointer,
                   onChangeRow: onUpdateRows,
@@ -39,6 +41,7 @@ class _HomePageState extends HomeState<HomeScreen> {
                   totalRow: rows,
                 ),
                 InteractiveTriangleLeftward(
+                  rows: rows,
                   position: verticalPosition,
                   onMovePointer: onUpdateVerticalPointer,
                   onChangeRow: onUpdateRows,
@@ -47,6 +50,7 @@ class _HomePageState extends HomeState<HomeScreen> {
               ],
             ),
             InteractiveTriangleUpward(
+              columns: columns,
               direction: TriangleDirection.upward,
               position: horizontalPosition,
               onMovePointer: onUpdateHorizontalPointer,

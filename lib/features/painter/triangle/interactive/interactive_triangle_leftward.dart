@@ -6,12 +6,14 @@ class InteractiveTriangleLeftward extends StatefulWidget {
   final Function(double) onMovePointer;
   final double? position;
   final TriangleDirection direction;
+  final int rows;
 
   const InteractiveTriangleLeftward({super.key,
     required this.onChangeRow,
     required this.onMovePointer,
     this.position,
-    required this.direction
+    required this.direction,
+    required this.rows
   });
 
   @override
@@ -39,6 +41,7 @@ class _InteractiveTriangleLeftwardState extends InteractiveTriangleState<Interac
       child: CustomPaint(
         size: Size(triangleSize, width),
         painter: TrianglePainter(
+          text: '${widget.rows}',
           direction: widget.direction,
           trianglePosition: trianglePosition!,
         ),

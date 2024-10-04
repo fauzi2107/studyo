@@ -6,12 +6,14 @@ class InteractiveTriangleUpward extends StatefulWidget {
   final Function(double) onMovePointer;
   final double? position;
   final TriangleDirection direction;
+  final int columns;
 
   const InteractiveTriangleUpward({super.key,
     required this.onChangeColumn,
     required this.onMovePointer,
     this.position,
-    required this.direction
+    required this.direction,
+    required this.columns
   });
 
   @override
@@ -39,6 +41,7 @@ class _InteractiveTriangleUpwardState extends InteractiveTriangleState<Interacti
       child: CustomPaint(
         size: Size(width, triangleSize),
         painter: TrianglePainter(
+          text: '${widget.columns}',
           direction: widget.direction,
           trianglePosition: trianglePosition!,
         ),

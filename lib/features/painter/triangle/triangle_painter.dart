@@ -1,5 +1,4 @@
 import '../../../ui_export.dart';
-import 'enum_triangle_direction.dart';
 
 class TrianglePainter extends CustomPainter {
   final Offset trianglePosition;
