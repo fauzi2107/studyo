@@ -21,7 +21,7 @@ class _InteractiveRectanglesState extends State<InteractiveRectangles> {
   @override
   void initState() {
     rectangleColors = List.generate(widget.totalColumn, (index) =>
-        List.generate(widget.totalRow, (j) => Colors.blue));
+        List.generate(widget.totalRow, (j) => Colors.grey));
     super.initState();
   }
 
@@ -30,7 +30,7 @@ class _InteractiveRectanglesState extends State<InteractiveRectangles> {
     if (rectangleColors.length != widget.totalColumn
         || rectangleColors.first.length != widget.totalRow) {
       rectangleColors = List.generate(widget.totalColumn, (index) =>
-          List.generate(widget.totalRow, (j) => Colors.blue));
+          List.generate(widget.totalRow, (j) => Colors.grey));
     }
 
     // Size of each rectangle
@@ -48,7 +48,7 @@ class _InteractiveRectanglesState extends State<InteractiveRectangles> {
 
         // Change color of the tapped rectangle
         setState(() {
-          rectangleColors[i][j] = rectangleColors[i][j] == Colors.blue ? Colors.red : Colors.blue;
+          rectangleColors[i][j] = rectangleColors[i][j] == Colors.grey ? Colors.lightBlueAccent : Colors.grey;
         });
       },
       child: CustomPaint(

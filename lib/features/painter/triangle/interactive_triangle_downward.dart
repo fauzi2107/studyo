@@ -1,17 +1,19 @@
+import 'package:studyo/features/painter/triangle/enum_triangle_direction.dart';
+
 import '../../../ui_export.dart';
-import 'interactive_triangle_state.dart';
-import 'triangle_painter.dart';
 
 class InteractiveTriangleDownward extends StatefulWidget {
 
   final Function(int) onChangeColumn;
   final Function(double) onMovePointer;
   final double? position;
+  final TriangleDirection direction;
 
   const InteractiveTriangleDownward({super.key,
     required this.onChangeColumn,
     this.position,
-    required this.onMovePointer
+    required this.onMovePointer,
+    required this.direction
   });
 
   @override
@@ -20,13 +22,11 @@ class InteractiveTriangleDownward extends StatefulWidget {
 }
 
 class _InteractiveTriangleDownwardState extends InteractiveTriangleState<InteractiveTriangleDownward> {
-  // Start and end points for the line
-  Offset startPoint = const Offset(0, 25);
   int totalColumn = 1;
 
   @override
   Widget build(BuildContext context) {
-    endPoint ??= Offset(width, triangleSize);
+    endPoint ??= widget.direction.endPoint(width);
     trianglePosition ??= endPoint;
     if (widget.position != null) {
       trianglePosition = Offset(widget.position!, triangleSize);
@@ -35,7 +35,7 @@ class _InteractiveTriangleDownwardState extends InteractiveTriangleState<Interac
     return GestureDetector(
       // Detect drag updates and move the triangle along the line
       onPanUpdate: (details) {
-        trianglePosition = onPositionUpdate(details, startPoint);
+        trianglePosition = onPositionUpdate(details, widget.direction.startPoint);
         totalColumn = customMapping(((trianglePosition!.dx / width) * 10).toInt());
         widget.onChangeColumn(totalColumn);
         widget.onMovePointer(trianglePosition!.dx);
@@ -44,8 +44,7 @@ class _InteractiveTriangleDownwardState extends InteractiveTriangleState<Interac
         size: Size(width, triangleSize),
         painter: TrianglePainter(
           text: '$totalColumn',
-          angle: pi / 2, // point triangle to downward
-          triangleSize: triangleSize,
+          direction: widget.direction,
           trianglePosition: trianglePosition!,
         ),
       ),

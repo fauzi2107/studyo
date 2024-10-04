@@ -1,15 +1,15 @@
 import '../../../ui_export.dart';
+import 'enum_triangle_direction.dart';
 
 class TrianglePainter extends CustomPainter {
   final Offset trianglePosition;
-  final double triangleSize, angle;
   final String text;
+  final TriangleDirection direction;
 
   TrianglePainter({
     this.text = '1',
     required this.trianglePosition,
-    required this.triangleSize,
-    required this.angle
+    required this.direction
   });
 
   @override
@@ -18,19 +18,19 @@ class TrianglePainter extends CustomPainter {
     drawTriangle(canvas);
 
     // draw text inside triangle position
-    // drawTextInsideTriangle(canvas);
+    drawTextInsideTriangle(canvas);
   }
 
   void drawTriangle(Canvas canvas) {
     // Define the points of the triangle (arrowhead)
     Offset point1 = Offset(
-      trianglePosition.dx - triangleSize * cos(angle - pi / 6),
-      trianglePosition.dy - triangleSize * sin(angle - pi / 6),
+      trianglePosition.dx - triangleSize * cos(direction.angle - pi / 6),
+      trianglePosition.dy - triangleSize * sin(direction.angle - pi / 6),
     );
 
     Offset point2 = Offset(
-      trianglePosition.dx - triangleSize * cos(angle + pi / 6),
-      trianglePosition.dy - triangleSize * sin(angle + pi / 6),
+      trianglePosition.dx - triangleSize * cos(direction.angle + pi / 6),
+      trianglePosition.dy - triangleSize * sin(direction.angle + pi / 6),
     );
 
     // Create a path for the triangle
@@ -53,7 +53,7 @@ class TrianglePainter extends CustomPainter {
     final span = TextSpan(
       style: const TextStyle(
         color: Colors.white,
-        fontSize: 12, // Adjust text size to fit inside the triangle
+        fontSize: 9, // Adjust text size to fit inside the triangle
       ),
       text: text,
     );

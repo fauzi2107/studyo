@@ -1,17 +1,19 @@
+import 'package:studyo/features/painter/triangle/enum_triangle_direction.dart';
+
 import '../../../ui_export.dart';
-import 'interactive_triangle_state.dart';
-import 'triangle_painter.dart';
 
 class InteractiveTriangleUpward extends StatefulWidget {
 
   final Function(int) onChangeColumn;
   final Function(double) onMovePointer;
   final double? position;
+  final TriangleDirection direction;
 
   const InteractiveTriangleUpward({super.key,
     required this.onChangeColumn,
     required this.onMovePointer,
-    this.position
+    this.position,
+    required this.direction
   });
 
   @override
@@ -20,12 +22,9 @@ class InteractiveTriangleUpward extends StatefulWidget {
 }
 
 class _InteractiveTriangleUpwardState extends InteractiveTriangleState<InteractiveTriangleUpward> {
-  // Start and end points for the line
-  Offset startPoint = const Offset(0, 0);
-
   @override
   Widget build(BuildContext context) {
-    endPoint ??= Offset(width, 0);
+    endPoint ??= widget.direction.endPoint(width);
     trianglePosition ??= endPoint;
     if (widget.position != null) {
       trianglePosition = Offset(widget.position!, 0);
@@ -34,7 +33,7 @@ class _InteractiveTriangleUpwardState extends InteractiveTriangleState<Interacti
     return GestureDetector(
       // Detect drag updates and move the triangle along the line
       onPanUpdate: (details) {
-        trianglePosition = onPositionUpdate(details, startPoint);
+        trianglePosition = onPositionUpdate(details, widget.direction.startPoint);
         final totalColumn = (trianglePosition!.dx / width) * 10;
         widget.onChangeColumn(customMapping(totalColumn.toInt()));
         widget.onMovePointer(trianglePosition!.dx);
@@ -42,8 +41,7 @@ class _InteractiveTriangleUpwardState extends InteractiveTriangleState<Interacti
       child: CustomPaint(
         size: Size(width, triangleSize),
         painter: TrianglePainter(
-          angle: -pi / 2, // point triangle to downward
-          triangleSize: triangleSize,
+          direction: widget.direction,
           trianglePosition: trianglePosition!,
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:studyo/features/painter/triangle/enum_triangle_direction.dart';
+
 import '../../../ui_export.dart';
 
 part 'home_state.dart';
@@ -21,6 +23,7 @@ class _HomePageState extends HomeState<HomeScreen> {
               position: horizontalPosition,
               onMovePointer: onUpdateHorizontalPointer,
               onChangeColumn: onUpdateColumn,
+              direction: TriangleDirection.downward,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -29,6 +32,7 @@ class _HomePageState extends HomeState<HomeScreen> {
                   position: verticalPosition,
                   onMovePointer: onUpdateVerticalPointer,
                   onChangeRow: onUpdateRows,
+                  direction: TriangleDirection.rightward,
                 ),
                 InteractiveRectangles(
                   totalColumn: columns,
@@ -38,10 +42,12 @@ class _HomePageState extends HomeState<HomeScreen> {
                   position: verticalPosition,
                   onMovePointer: onUpdateVerticalPointer,
                   onChangeRow: onUpdateRows,
+                  direction: TriangleDirection.leftward,
                 ),
               ],
             ),
             InteractiveTriangleUpward(
+              direction: TriangleDirection.upward,
               position: horizontalPosition,
               onMovePointer: onUpdateHorizontalPointer,
               onChangeColumn: onUpdateColumn,

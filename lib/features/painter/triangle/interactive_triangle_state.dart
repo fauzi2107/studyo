@@ -4,8 +4,6 @@ abstract class InteractiveTriangleState<T extends StatefulWidget> extends State<
   // Initial position of the triangle (starting at the end point)
   Offset? endPoint, trianglePosition;
 
-  double triangleSize = 25.0;
-
   // get width of screen for how long triangle can moved
   // it is used for height too
   double get width => MediaQuery.of(context).size.width * 0.7;
