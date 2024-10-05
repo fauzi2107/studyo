@@ -39,15 +39,25 @@ class _HomePageState extends HomeState<HomeScreen> {
           ),
           child: Column(
             children: [
-              Text('$numerator'),
-              SizedBox(
+              Text('$numerator',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600
+                ),
+              ),
+              const SizedBox(
                 width: 25,
                 child: Divider(
                   color: Colors.grey,
                   height: 1,
                 ),
               ),
-              Text('$denominator'),
+              Text('$denominator',
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600
+                ),
+              ),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
