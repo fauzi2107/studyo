@@ -1,3 +1,5 @@
+import 'package:studyo/features/home/presentation/widget/pie_chart_widget.dart';
+
 import '../../../ui_export.dart';
 
 part 'home_state.dart';
@@ -37,92 +39,104 @@ class _HomePageState extends HomeState<HomeScreen> {
           padding: const EdgeInsets.symmetric(
             vertical: 20
           ),
-          child: Column(
-            children: [
-              Text('$numerator',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600
+          child: Builder(
+            builder: (context) {
+              return Center(
+                child: PieChart(
+                  values: [20, 30, 20, 10, 20],  // Your data (percentages or values)
+                  colors: [Colors.blue, Colors.red, Colors.green, Colors.yellow, Colors.teal],  // Colors for each slice
+                  size: 200,
                 ),
-              ),
-              const SizedBox(
-                width: 25,
-                child: Divider(
-                  color: Colors.grey,
-                  height: 1,
-                ),
-              ),
-              Text('$denominator',
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InteractiveTriangleDownward(
-                      position: horizontalPosition,
-                      onMovePointer: onUpdateHorizontalPointer,
-                      onChangeColumn: onUpdateColumn,
-                      direction: TriangleDirection.downward,
-                      columns: columns,
+              );
+
+              return Column(
+                children: [
+                  Text('$numerator',
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600
                     ),
-                    Row(
+                  ),
+                  const SizedBox(
+                    width: 25,
+                    child: Divider(
+                      color: Colors.grey,
+                      height: 1,
+                    ),
+                  ),
+                  Text('$denominator',
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        InteractiveTriangleRightward(
-                          rows: rows,
-                          position: verticalPosition,
-                          onMovePointer: onUpdateVerticalPointer,
-                          onChangeRow: onUpdateRows,
-                          direction: TriangleDirection.rightward,
+                        InteractiveTriangleDownward(
+                          position: horizontalPosition,
+                          onMovePointer: onUpdateHorizontalPointer,
+                          onChangeColumn: onUpdateColumn,
+                          direction: TriangleDirection.downward,
+                          columns: columns,
                         ),
-                        InteractiveRectangles(
-                          totalColumn: columns,
-                          totalRow: rows,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InteractiveTriangleRightward(
+                              rows: rows,
+                              position: verticalPosition,
+                              onMovePointer: onUpdateVerticalPointer,
+                              onChangeRow: onUpdateRows,
+                              direction: TriangleDirection.rightward,
+                            ),
+                            InteractiveRectangles(
+                              totalColumn: columns,
+                              totalRow: rows,
+                            ),
+                            InteractiveTriangleLeftward(
+                              rows: rows,
+                              position: verticalPosition,
+                              onMovePointer: onUpdateVerticalPointer,
+                              onChangeRow: onUpdateRows,
+                              direction: TriangleDirection.leftward,
+                            ),
+                          ],
                         ),
-                        InteractiveTriangleLeftward(
-                          rows: rows,
-                          position: verticalPosition,
-                          onMovePointer: onUpdateVerticalPointer,
-                          onChangeRow: onUpdateRows,
-                          direction: TriangleDirection.leftward,
-                        ),
+                        InteractiveTriangleUpward(
+                          columns: columns,
+                          direction: TriangleDirection.upward,
+                          position: horizontalPosition,
+                          onMovePointer: onUpdateHorizontalPointer,
+                          onChangeColumn: onUpdateColumn,
+                        )
                       ],
                     ),
-                    InteractiveTriangleUpward(
-                      columns: columns,
-                      direction: TriangleDirection.upward,
-                      position: horizontalPosition,
-                      onMovePointer: onUpdateHorizontalPointer,
-                      onChangeColumn: onUpdateColumn,
-                    )
-                  ],
-                ),
-              ),
-              MaterialButton(
-                onPressed: () {
+                  ),
+                  MaterialButton(
+                    onPressed: () {
 
-                },
-                color: Colors.grey,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)
-                ),
-                elevation: 0,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                padding: EdgeInsets.zero,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: const Icon(Icons.check,
-                    color: Colors.white,
-                    size: 32,
+                    },
+                    color: Colors.grey,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    elevation: 0,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    padding: EdgeInsets.zero,
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: const Icon(Icons.check,
+                          color: Colors.white,
+                          size: 32,
+                        )
+                    ),
                   )
-                ),
-              )
-            ],
+                ],
+              );
+            },
           ),
         ),
       ),
