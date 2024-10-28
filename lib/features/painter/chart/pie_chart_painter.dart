@@ -32,7 +32,7 @@ class PieChartPainter extends CustomPainter {
       final sweepAngle = (values[i] / total) * (2 * pi) - spacing * (pi / 180);
       final Paint paint = Paint()
         ..color = colors[i]
-        ..style = PaintingStyle.fill;
+        ..style = PaintingStyle.stroke;
 
       // Define the path for the slice with rounded edges
       Path path = Path();
@@ -57,12 +57,12 @@ class PieChartPainter extends CustomPainter {
       );
 
       Offset outerStartOffset = Offset(
-        center.dx + (outerRadius - 10) * cos(startAngle - offsetAngleRadians),  // Move inward by reducing radius
-        center.dy + (outerRadius - 10) * sin(startAngle - offsetAngleRadians),
+        center.dx + (outerRadius - offsetDistance) * cos(startAngle - offsetAngleRadians),  // Move inward by reducing radius
+        center.dy + (outerRadius - offsetDistance) * sin(startAngle - offsetAngleRadians),
       );
       Offset outerEndOffset = Offset(
-        center.dx + (outerRadius - 10) * cos(startAngle + sweepAngle + offsetAngleRadians),  // Move inward by reducing radius
-        center.dy + (outerRadius - 10) * sin(startAngle + sweepAngle + offsetAngleRadians),
+        center.dx + (outerRadius - offsetDistance) * cos(startAngle + sweepAngle + offsetAngleRadians),  // Move inward by reducing radius
+        center.dy + (outerRadius - offsetDistance) * sin(startAngle + sweepAngle + offsetAngleRadians),
       );
 
       Offset innerStartOffset = Offset(
@@ -76,7 +76,7 @@ class PieChartPainter extends CustomPainter {
 
       // Move to the outer start point, make a line of second outer start and make a round corner
       path.moveTo(outerStartOffset.dx, outerStartOffset.dy);
-      path.arcToPoint(outerStart, radius: const Radius.circular(10), clockwise: true);
+      path.arcToPoint(outerStart, radius: Radius.circular(10), clockwise: true);
       path.lineTo(outerStart.dx, outerStart.dy);
 
       // Draw the outer arc
