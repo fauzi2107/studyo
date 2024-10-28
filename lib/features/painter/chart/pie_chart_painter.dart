@@ -13,9 +13,10 @@ class PieChartPainter extends CustomPainter {
   PieChartPainter({
     required this.values,
     required this.colors,
-    this.spacing = 2.0,
-    this.donutWidth = 20,
-  }) : assert(donutWidth > 0 && donutWidth <= 50, 'Insert between 0 - 100, it will calculate as percentage');
+    this.spacing = 11.0,
+    this.donutWidth = 20,})
+      : assert(donutWidth > 0 && donutWidth <= 50, 'Insert between 0 - 50, it will calculate as percentage'),
+        assert(spacing >= 11 && spacing <= 30, 'Value has to be between 11 and 30');
 
   @override
   void paint(Canvas canvas, Size size) {
