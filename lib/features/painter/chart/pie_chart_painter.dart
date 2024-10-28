@@ -14,8 +14,8 @@ class PieChartPainter extends CustomPainter {
     required this.values,
     required this.colors,
     this.spacing = 2.0,
-    this.donutWidth = 20,})
-      : assert(donutWidth > 0 && donutWidth <= 50, 'Insert between 0 - 100, it will calculate as percentage');
+    this.donutWidth = 20,
+  }) : assert(donutWidth > 0 && donutWidth <= 50, 'Insert between 0 - 100, it will calculate as percentage');
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -25,6 +25,7 @@ class PieChartPainter extends CustomPainter {
     final double total = values.reduce((a, b) => a + b);
     final offsetDistance = outerRadius * 0.07;
     const offsetAngleRadians = 2 * (pi / 67.5);
+    final borderRadius = size.width * 0.05;
 
     double startAngle = -pi / 2;  // Start from the top (12 o'clock)
 
@@ -76,7 +77,7 @@ class PieChartPainter extends CustomPainter {
 
       // Move to the outer start point, make a line of second outer start and make a round corner
       path.moveTo(outerStartOffset.dx, outerStartOffset.dy);
-      path.arcToPoint(outerStart, radius: Radius.circular(10), clockwise: true);
+      path.arcToPoint(outerStart, radius: Radius.circular(borderRadius), clockwise: true);
       path.lineTo(outerStart.dx, outerStart.dy);
 
       // Draw the outer arc
@@ -89,12 +90,12 @@ class PieChartPainter extends CustomPainter {
 
       // create and connect outer end point
       path.lineTo(outerEnd.dx, outerEnd.dy);
-      path.arcToPoint(outerEndOffset, radius: const Radius.circular(10), clockwise: true);
+      path.arcToPoint(outerEndOffset, radius: Radius.circular(borderRadius), clockwise: true);
       path.lineTo(outerEndOffset.dx, outerEndOffset.dy);
 
       // Connect to the inner end point
       path.lineTo(innerEndOffset.dx, innerEndOffset.dy);
-      path.arcToPoint(innerEnd, radius: const Radius.circular(10), clockwise: true);
+      path.arcToPoint(innerEnd, radius: Radius.circular(borderRadius), clockwise: true);
       path.lineTo(innerEnd.dx, innerEnd.dy);
 
       // Draw the inner arc back to the start
@@ -107,7 +108,7 @@ class PieChartPainter extends CustomPainter {
 
       // create and connect inner start point
       path.lineTo(innerStart.dx, innerStart.dy);
-      path.arcToPoint(innerStartOffset, radius: const Radius.circular(10), clockwise: true);
+      path.arcToPoint(innerStartOffset, radius: Radius.circular(borderRadius), clockwise: true);
       path.lineTo(innerStartOffset.dx, innerStartOffset.dy);
 
       // Close the path
