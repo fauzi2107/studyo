@@ -20,6 +20,7 @@ class PieChart extends StatelessWidget {
         values: values,
         colors: colors,
         spacing: 15,
+        donutWidth: 25
       ),
     );
   }

@@ -45,7 +45,7 @@ class _HomePageState extends HomeState<HomeScreen> {
                 child: PieChart(
                   values: [20, 30, 20, 10, 20],  // Your data (percentages or values)
                   colors: [Colors.blue, Colors.red, Colors.green, Colors.yellow, Colors.teal],  // Colors for each slice
-                  size: 200,
+                  size: 250,
                 ),
               );
 
